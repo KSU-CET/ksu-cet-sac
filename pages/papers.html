@@ -12,6 +12,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="pages.css">
     <style>
+        .coming-soon {
+            text-align: center;
+            max-width: 700px;
+            margin-top: -3.2rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            line-height: 0;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+        .department-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 0.5rem auto 0.8rem auto;
+            max-width: 900px;
+        }
+        .department-pills a {
+            display: inline-block;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: #136ef7;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 1px solid var(--card-border, rgba(0,0,0,0.08));
+        }
+        .department-pills a:hover {
+            background: var(--primary-tint, rgba(0,0,0,0.05));
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
         .department-card h2 {
             font-size: 1.2rem;
             font-weight: 700;
@@ -97,7 +151,7 @@
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">
-                <div class="logo-images">  
+                <div class="logo-images">
                     <img src="../images/ksu logo white.png" alt="KSU Logo" class="logo-image logo-ksu-dark"> </div> <a
                     href="../index.html">KSU Student Assist Cell</a>
             </div>
@@ -121,6 +175,24 @@
             <p>Previous year question papers from CET, series and semester papers.</p>
             <p>Select a department to access question papers by semester and subject.</p>
         </section>
+        <div class="coming-soon">
+            <div class="icon">
+                <i class="fas fa-book-reader"></i>
+            </div>
+            <h2>Solved Sample Papers Available</h2>
+            <p>Solved Sample Papers are now made available for S1.</p>
+            <p>Links are available below and in each department's respective pages.</p>
+            <div class="department-pills">
+                <a href="https://drive.google.com/drive/folders/1kYtclqumttot47IAsIu9J_R4MLXyDLuR?usp=sharing" target="_blank" rel="noopener noreferrer">CSE</a>
+                <a href="https://drive.google.com/drive/folders/18sgW7leFfMsyxqsdFPRbkfHl4VpT0y1p?usp=sharing" target="_blank" rel="noopener noreferrer">ECE</a>
+                <a href="https://drive.google.com/drive/folders/18sgW7leFfMsyxqsdFPRbkfHl4VpT0y1p?usp=sharing" target="_blank" rel="noopener noreferrer">EEE</a>
+                <a href="https://drive.google.com/drive/folders/18sgW7leFfMsyxqsdFPRbkfHl4VpT0y1p?usp=sharing" target="_blank" rel="noopener noreferrer">EL</a>
+                <a href="https://drive.google.com/drive/folders/18sgW7leFfMsyxqsdFPRbkfHl4VpT0y1p?usp=sharing" target="_blank" rel="noopener noreferrer">AEI</a>
+                <a href="https://drive.google.com/drive/folders/1esWPdbUJ-xpVTaVtlRdTG4Yej324tnMA?usp=sharing" target="_blank" rel="noopener noreferrer">ME</a>
+                <a href="https://drive.google.com/drive/folders/1esWPdbUJ-xpVTaVtlRdTG4Yej324tnMA?usp=sharing" target="_blank" rel="noopener noreferrer">CE</a>
+                <a href="https://drive.google.com/drive/folders/1esWPdbUJ-xpVTaVtlRdTG4Yej324tnMA?usp=sharing" target="_blank" rel="noopener noreferrer">IE</a>
+            </div>
+        </div>
         <div class="papers-container">
             <div class="departments-grid"> <!-- CSE Department -->
                 <div class="department-card" data-department="cse">

@@ -1261,6 +1261,22 @@ main .semester-grid {
     box-shadow: 0 2px 4px var(--shadow-color);/* Default width for larger screens */
 }
 
+/* Centered pill container used across pages */
+.department-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0.5rem auto 3rem auto;
+  max-width: 900px;
+  text-align: center;
+}
+/* Slightly taller pill links (higher specificity to override page-local styles) */
+main .department-pills a {
+  padding: 0.65rem 1rem;
+}
+
 @media (max-width: 768px) {
     .keam-last-ranks {
         width: 95%; /* Slightly wider on mobile */

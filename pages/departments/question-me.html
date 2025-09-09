@@ -17,6 +17,22 @@
             display: flex;
             flex-direction: column;
         }
+        .department-pills a {
+            display: inline-block;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: #136ef7;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 1px solid var(--card-border, rgba(0,0,0,0.08));
+        }
+        .department-pills a:hover {
+            background: var(--primary-tint, rgba(0,0,0,0.05));
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
         .quick-toolbar {
             position: fixed;
             bottom: 2.2rem;
@@ -352,6 +368,9 @@
 
             <!-- Semester 1 Subjects -->
             <div class="semester-content active" id="sem1">
+                <div class="department-pills">
+                    <a href="https://drive.google.com/drive/folders/1esWPdbUJ-xpVTaVtlRdTG4Yej324tnMA?usp=sharing" target="_blank" rel="noopener noreferrer">Click here to access Solved Sample Papers for S1</a>
+                </div>
                 <div class="subject-grid">
                     <div class="subject-card">
                         <div class="subject-header">Introduction to Civil and Mechanical Engineering</div>
