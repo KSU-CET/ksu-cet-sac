@@ -242,9 +242,6 @@ main {
 }
 .contacts-row-top {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  justify-content: center;
-  margin-left: 10%; /* visually center between bottom row cards */
-  width: 80%;
 }
 .contacts-row-bottom {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
