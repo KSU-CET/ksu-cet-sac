@@ -24,6 +24,59 @@
             padding: 1rem;
         }
         
+        .search-section {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            font-size: 1.1rem;
+            background: var(--card-glass);
+            backdrop-filter: blur(var(--card-glass-blur));
+            border: 2px solid var(--card-border);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            transition: all var(--transition);
+            outline: none;
+            box-shadow: var(--shadow-color);
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .clear-search {
+            position: absolute;
+            right: 0.7rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: all var(--transition);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.2rem;
+            height: 2.2rem;
+        }
+        
+        .clear-search:hover {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--primary-color);
+        }
+        
         .filter-section {
             display: flex;
             flex-wrap: wrap;
@@ -344,6 +397,15 @@
             .scholarship-actions {
                 flex-direction: column;
             }
+            
+            .search-input {
+                font-size: 1rem;
+                padding: 0.9rem 2.8rem 0.9rem 0.9rem;
+            }
+            
+            .search-section {
+                padding: 0 0.5rem;
+            }
         }
     </style>
 </head>
@@ -368,7 +430,6 @@
                 <li><a href="syllabus.html"><i class="fas fa-list-alt"></i><span class="nav-label">Syllabus</span></a></li>
                 <li><a href="new-admissions.html"><i class="fas fa-user-graduate"></i><span class="nav-label">New Admissions</span></a></li>
                 <li><a href="minor-courses.html"><i class="fas fa-chalkboard-teacher"></i><span class="nav-label">Minor Courses</span></a></li>
-                <li><a href="scholarship.html"><i class="fas fa-graduation-cap"></i><span class="nav-label">Scholarships</span></a></li>
                 <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-label">About Us</span></a></li>
                 <li><a href="challenge-courses-and-digital-101.html"><i class="fa-solid fa-calendar"></i><span class="nav-label">Challenge Courses and Digital 101</span></a></li>
             </ul>
@@ -382,6 +443,14 @@
         </section>
 
         <div class="scholarship-container">
+            <!-- Search Section -->
+            <div class="search-section" style="max-width: 1100px; margin: -2rem auto 4rem 0;">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search scholarships by name..." autocomplete="off">
+                <button class="clear-search" id="clearSearch" style="display: none;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
             <!-- Filter Section -->
             <h3 class="filter-title" style="text-align: center; color: var(--text-color); font-size: 1.5rem; font-weight: 600; margin-top: -3rem; margin-bottom: 1rem;">Filter by:</h3>
             <div class="filter-section">
@@ -745,6 +814,30 @@
             type: 'all',
             source: 'all'
         };
+        let searchTerm = '';
+
+        // Fuzzy search function
+        function fuzzyMatch(str, pattern) {
+            if (!pattern) return true;
+            const lowerStr = str.toLowerCase();
+            const lowerPattern = pattern.toLowerCase();
+            
+            // First try exact match
+            if (lowerStr.includes(lowerPattern)) return true;
+            
+            // Try fuzzy match - check if all characters appear in order
+            let strIndex = 0;
+            let patternIndex = 0;
+            
+            while (strIndex < lowerStr.length && patternIndex < lowerPattern.length) {
+                if (lowerStr[strIndex] === lowerPattern[patternIndex]) {
+                    patternIndex++;
+                }
+                strIndex++;
+            }
+            
+            return patternIndex === lowerPattern.length;
+        }
 
         function renderScholarships() {
             const grid = document.getElementById('scholarshipGrid');
@@ -753,7 +846,8 @@
             const filteredScholarships = scholarships.filter(scholarship => {
                 const typeMatch = currentFilters.type === 'all' || scholarship.type === currentFilters.type;
                 const sourceMatch = currentFilters.source === 'all' || scholarship.source === currentFilters.source;
-                return typeMatch && sourceMatch;
+                const searchMatch = !searchTerm || fuzzyMatch(scholarship.title, searchTerm);
+                return typeMatch && sourceMatch && searchMatch;
             });
 
             if (filteredScholarships.length === 0) {
@@ -815,6 +909,31 @@
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const clearSearch = document.getElementById('clearSearch');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    searchTerm = this.value.trim();
+                    if (searchTerm) {
+                        clearSearch.style.display = 'flex';
+                    } else {
+                        clearSearch.style.display = 'none';
+                    }
+                    renderScholarships();
+                });
+            }
+            
+            if (clearSearch) {
+                clearSearch.addEventListener('click', function() {
+                    searchInput.value = '';
+                    searchTerm = '';
+                    this.style.display = 'none';
+                    renderScholarships();
+                });
+            }
+            
             // Filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
