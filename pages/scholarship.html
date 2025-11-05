@@ -131,6 +131,31 @@
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         
+        .sort-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .sort-btn:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+        
+        .sort-btn.active {
+            background: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
         .scholarship-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -390,6 +415,22 @@
                 gap: 1rem;
             }
             
+            .sort-section {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .sort-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .sort-btn {
+                min-width: 100px;
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+            
             .scholarship-grid {
                 grid-template-columns: 1fr;
             }
@@ -465,6 +506,16 @@
                         <button class="filter-btn" data-category="source" data-value="government">Government</button>
                         <button class="filter-btn" data-category="source" data-value="private">Private</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Sort Section -->
+            <div class="sort-section" style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <label style="font-weight: 600; color: var(--text-color); font-size: 1.35rem; text-align: center;">Sort by Date:</label>
+                <div class="sort-buttons" style="display: flex; gap: 0.5rem;">
+                    <button class="sort-btn" data-sort="none">None</button>
+                    <button class="sort-btn" data-sort="asc">Earliest First</button>
+                    <button class="sort-btn" data-sort="desc">Latest First</button>
                 </div>
             </div>
 
@@ -815,6 +866,43 @@
             source: 'all'
         };
         let searchTerm = '';
+        let sortOrder = 'none'; // 'none', 'asc', 'desc'
+
+        // Parse date from DD/MM/YY format
+        function parseDate(dateStr) {
+            if (!dateStr) return null;
+            const parts = dateStr.split('/');
+            if (parts.length !== 3) return null;
+            
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed in Date
+            const year = parseInt(parts[2], 10);
+            
+            // Assume 20XX for years like 25, 26, etc.
+            const fullYear = year < 50 ? 2000 + year : 1900 + year;
+            
+            return new Date(fullYear, month, day);
+        }
+
+        // Sort scholarships by date
+        function sortScholarships(scholarshipsArray) {
+            if (sortOrder === 'none') {
+                return scholarshipsArray;
+            }
+            
+            return [...scholarshipsArray].sort((a, b) => {
+                const dateA = parseDate(a.lastDate);
+                const dateB = parseDate(b.lastDate);
+                
+                // Handle invalid dates - put them at the end
+                if (!dateA && !dateB) return 0;
+                if (!dateA) return 1;
+                if (!dateB) return -1;
+                
+                const comparison = dateA.getTime() - dateB.getTime();
+                return sortOrder === 'asc' ? comparison : -comparison;
+            });
+        }
 
         // Fuzzy search function
         function fuzzyMatch(str, pattern) {
@@ -850,7 +938,10 @@
                 return typeMatch && sourceMatch && searchMatch;
             });
 
-            if (filteredScholarships.length === 0) {
+            // Apply sorting
+            const sortedScholarships = sortScholarships(filteredScholarships);
+
+            if (sortedScholarships.length === 0) {
                 grid.innerHTML = '';
                 noResults.style.display = 'block';
                 return;
@@ -858,7 +949,7 @@
 
             noResults.style.display = 'none';
             
-            grid.innerHTML = filteredScholarships.map(scholarship => `
+            grid.innerHTML = sortedScholarships.map(scholarship => `
                 <div class="scholarship-card">
                 <div class="scholarship-header">
                     <h3 class="scholarship-title">${scholarship.title}</h3>
@@ -942,6 +1033,28 @@
                     updateFilters(category, value);
                 });
             });
+
+            // Sort buttons
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sort = this.dataset.sort;
+                    
+                    // Update sort order
+                    sortOrder = sort;
+                    
+                    // Update button states - remove active from all sort buttons
+                    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Re-render scholarships
+                    renderScholarships();
+                });
+            });
+
+            // Set default active state for "None" sort button
+            document.querySelector('.sort-btn[data-sort="none"]').classList.add('active');
 
             // Toolbar functionality
             const toolbar = document.getElementById('quickToolbar');
