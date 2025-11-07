@@ -232,6 +232,11 @@
             border: 1px solid rgba(255, 193, 7, 0.5) !important;
         }
         
+        .scholarship-tags .scholarship-deadline[style*="display: block"] {
+            width: 100%;
+            margin-top: 0.25rem;
+        }
+        
         .scholarship-description {
             color: var(--text-muted);
             line-height: 1.6;
@@ -573,7 +578,7 @@
                 ],
                 applyLink: "https://scholarships.gov.in/Students",
                 infoLink: "https://www.instagram.com/p/DPl--rmk6_7/?igsh=MWxjY3RzejBvZzh0bQ==",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 2,
@@ -588,7 +593,7 @@
                 ],
                 applyLink: "https://scholarships.gov.in/Students",
                 infoLink: "https://www.instagram.com/p/DOBuVWXk4cm/?igsh=Y2NxbThqOGE0cWNz",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 3,
@@ -604,7 +609,7 @@
                 ],
                 applyLink: "https://scholarships.gov.in/Students",
                 infoLink: "https://www.instagram.com/p/DNH29MlTC0u/?igsh=MWpvankxd3NiNGxlNA==",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 4,
@@ -619,7 +624,7 @@
                 ],
                 applyLink: "https://www.buddy4study.com/page/kotak-kanya-scholarship",
                 infoLink: "https://www.instagram.com/p/DNDw-fczjZj/?igsh=MWljdG01bDFsMXpwdQ==",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 5,
@@ -635,7 +640,7 @@
                 ],
                 applyLink: "https://meahouston.org/apply-for-scholarship/",
                 infoLink: "https://www.instagram.com/p/DN-0j1ik68p/?igsh=MXBnOG9ybWZvdGgxdA==",
-                lastDate: "01/11/25"
+                lastDate: "Closed"
             },
             {
                 id: 6,
@@ -651,12 +656,12 @@
                 ],
                 applyLink: "https://www.buddy4study.com/page/ugo-scholarship-program",
                 infoLink: "https://www.instagram.com/p/DOTLVd0Ewvz/?igsh=MXVqbWs5d3l6ZHhkOQ==",
-                lastDate: "31/10/25"
+                lastDate: "Closed"
             },
             {
                 id: 7,
                 title: "Loreal India Scholarship",
-                amount: "₹1 Lakh/year (PG), ₹62,500/year (UG)",
+                amount: "₹1 Lakh/year    (PG), ₹62,500/year (UG)",
                 type: "girl",
                 source: "private",
                 description: "Scholarship for female students pursuing UG or PG courses in science.",
@@ -668,7 +673,7 @@
                 ],
                 applyLink: "https://www.buddy4study.com/page/loreal-india-for-young-women-in-science-scholarships",
                 infoLink: "https://www.instagram.com/p/DPjKg7Kk16B/?igsh=Ym5xZ3gyN203NnNi",
-                lastDate: "03/11/25"
+                lastDate: "Closed"
             },
             {
                 id: 8,
@@ -699,7 +704,7 @@
                 ],
                 applyLink: "https://scholarships.gov.in/Students",
                 infoLink: "https://www.instagram.com/p/DM5IgLATBS7/?igsh=MTh1cTMzeW9uZ3A3Zw==",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 10,
@@ -715,7 +720,7 @@
                 ],
                 applyLink: "https://www.buddy4study.com/page/infosys-stem-stars-scholarship",
                 infoLink: "https://www.instagram.com/p/DNKujNFzSe5/?igsh=MWplZXVnY2xhMGd5Nw==",
-                lastDate: "30/10/25"
+                lastDate: "Closed"
             },
             {
                 id: 11,
@@ -731,7 +736,7 @@
                 ],
                 applyLink: "https://www.parivartanecss.com/",
                 infoLink: "https://www.instagram.com/p/DM8d-CgzpPH/?igsh=YnFtdmJ6NGIzemZz",
-                lastDate: "30/10/25"
+                lastDate: "31/12/25"
             },
             {
                 id: 12,
@@ -747,7 +752,7 @@
                 ],
                 applyLink: "https://scholarships.gov.in/Students",
                 infoLink: "https://www.instagram.com/p/DM4jBYGT6m-/?igsh=dnh1MGl4MnJyNTZi",
-                lastDate: "31/10/25"
+                lastDate: "15/11/25"
             },
             {
                 id: 13,
@@ -827,7 +832,11 @@
                 ],
                 applyLink: "https://egrantz.kerala.gov.in/",
                 infoLink: "https://drive.google.com/file/d/1UORJo3nszh61tIP3ihgYj8Hhh7BNeJ5d/view?usp=sharing",
-                lastDate: "31/10/25"
+                lastDate: [
+                    { category: "General, OBC (H), OBC & OEC", date: "15/11/25" },
+                    { category: "ST", date: "20/11/25" },
+                    { category: "SC", date: "25/03/26" }
+                ]
             },
             {
                 id: 18,
@@ -856,7 +865,7 @@
                 ],
                 applyLink: "https://www.schemes.kswcfc.org/",
                 infoLink: "https://www.instagram.com/p/DQKHxFeE5br/?igsh=MWJ4YjN2dnV6cHZjMQ==",
-                lastDate: "04/11/25"
+                lastDate: "15/11/25"
             }
         ];
 
@@ -870,7 +879,13 @@
 
         // Parse date from DD/MM/YY format
         function parseDate(dateStr) {
-            if (!dateStr) return null;
+            if (!dateStr || typeof dateStr !== 'string') return null;
+            
+            // Handle non-date strings like "Closed"
+            if (dateStr.toLowerCase() === 'closed' || !dateStr.includes('/')) {
+                return null;
+            }
+            
             const parts = dateStr.split('/');
             if (parts.length !== 3) return null;
             
@@ -878,10 +893,32 @@
             const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed in Date
             const year = parseInt(parts[2], 10);
             
+            // Validate parsed values
+            if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
+            
             // Assume 20XX for years like 25, 26, etc.
             const fullYear = year < 50 ? 2000 + year : 1900 + year;
             
             return new Date(fullYear, month, day);
+        }
+
+        // Get the earliest date from a scholarship (handles both string and array formats)
+        function getEarliestDate(scholarship) {
+            if (!scholarship.lastDate) return null;
+            
+            // If it's an array of category dates, get the earliest one
+            if (Array.isArray(scholarship.lastDate)) {
+                const dates = scholarship.lastDate
+                    .map(item => parseDate(item.date))
+                    .filter(date => date !== null);
+                if (dates.length === 0) return null;
+                return dates.reduce((earliest, current) => 
+                    current < earliest ? current : earliest
+                );
+            }
+            
+            // If it's a string, parse it directly
+            return parseDate(scholarship.lastDate);
         }
 
         // Sort scholarships by date
@@ -891,8 +928,8 @@
             }
             
             return [...scholarshipsArray].sort((a, b) => {
-                const dateA = parseDate(a.lastDate);
-                const dateB = parseDate(b.lastDate);
+                const dateA = getEarliestDate(a);
+                const dateB = getEarliestDate(b);
                 
                 // Handle invalid dates - put them at the end
                 if (!dateA && !dateB) return 0;
@@ -902,6 +939,27 @@
                 const comparison = dateA.getTime() - dateB.getTime();
                 return sortOrder === 'asc' ? comparison : -comparison;
             });
+        }
+
+        // Format deadline display (handles both string and array formats)
+        function formatDeadline(lastDate) {
+            if (!lastDate) return '<span class="scholarship-tag scholarship-deadline">Deadline: N/A</span>';
+            
+            // If it's an array of category dates, format them
+            if (Array.isArray(lastDate)) {
+                return lastDate.map(item => {
+                    const isClosed = item.date && item.date.toLowerCase() === 'closed';
+                    const deadlineClass = isClosed ? 'scholarship-tag' : 'scholarship-tag scholarship-deadline';
+                    return `<span class="${deadlineClass}" style="display: block; margin-bottom: 0.25rem;">
+                        ${item.category}: ${item.date}
+                    </span>`;
+                }).join('');
+            }
+            
+            // If it's a string, return simple format
+            const isClosed = lastDate.toLowerCase() === 'closed';
+            const deadlineClass = isClosed ? 'scholarship-tag' : 'scholarship-tag scholarship-deadline';
+            return `<span class="${deadlineClass}">Deadline: ${lastDate}</span>`;
         }
 
         // Fuzzy search function
@@ -957,7 +1015,7 @@
                     <div class="scholarship-tags">
                         <span class="scholarship-tag">${scholarship.type === 'girl' ? 'Girl Scholarship' : 'General'}</span>
                         <span class="scholarship-tag">${scholarship.source === 'government' ? 'Government' : 'Private'}</span>
-                        <span class="scholarship-tag scholarship-deadline">Deadline: ${scholarship.lastDate}</span>
+                        ${formatDeadline(scholarship.lastDate)}
                     </div>
                 </div>
                     <div class="scholarship-description">
